@@ -1,0 +1,19 @@
+{
+  "name": "boundless-groceries",
+  "version": "1.0.0",
+  "description": "Making cheap recipes more accessible one at a time?",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tianhg28/boundless-groceries.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tianhg28/boundless-groceries/issues"
+  },
+  "homepage": "https://github.com/tianhg28/boundless-groceries#readme"
+}
