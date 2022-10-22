@@ -43,3 +43,8 @@ async function getProducts(locationId) {
     // Return JSON object
     return productResponse.json();
   }
+
+module.exports = {
+  getLocations,
+  getProducts
+};
