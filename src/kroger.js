@@ -1,5 +1,9 @@
 import getAccessToken from "../src/authentication.js";
 import fetch from 'node-fetch';
+import * as dotenv from 'dotenv';
+dotenv.config({path: '../.env'});
+
+
 
 
 async function getLocations(zipCode) {
@@ -26,21 +30,20 @@ async function getLocations(zipCode) {
 async function getPricesInLocations(zipCode, productNames) {
   let res = [];
   let locations = await getLocations(zipCode);
-  for (const location of locations) {
+  await locations.forEach(async location => {
     let locationId = location.locationId;
     let totalPrice = 0;
-    for (const productName of productNames) {
+    await productNames.forEach(async productName => {
       let price = await getCheapestPrice(locationId, productName);
       if (price == -1) {
         totalPrice = null;
-        break;
       }
       totalPrice += price; 
-    }
-    if (totalPrice != null) {
-      res.push({location, totalPrice});
-    }
-  };
+      if (totalPrice != null) {
+        res.push({location, totalPrice});
+      }
+    });
+  })
   return res;
 }
 

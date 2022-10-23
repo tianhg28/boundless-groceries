@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import express from'express';
 import twilio from 'twilio';
 import bodyParser from 'body-parser';
