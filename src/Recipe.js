@@ -45,6 +45,8 @@ export function getIngredients(id) {
         }
         url.push(data['sourceUrl']);
   });
+  return ingredients;
 }
 
 getRecipes('chocolate')
+console.log(await getIngredients(639182));
