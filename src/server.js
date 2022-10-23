@@ -1,7 +1,6 @@
 import express from'express';
 import twilio from 'twilio';
 import bodyParser from 'body-parser';
-import isValidZipcode from 'is-valid-zipcode';
 import { getIngredients } from './Recipe';
 import { getPricesInLocations } from './kroger';
 const { MessagingResponse } = twilio.twiml;
@@ -34,6 +33,11 @@ app.post('/sms', async (req, res) => {
     // for each recipe output something like:
     // Recipe Name: <name>
     // Recipe ID: <id>
+    let responseString = '';
+    recipes.result.forEach(element => {
+      responseString += element.title + ' ' + element.id + '\n';
+    });
+    twiml.message(responseString);
 
   } else {
     // Call getProducts with recipe ID
