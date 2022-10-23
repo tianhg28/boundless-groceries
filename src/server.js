@@ -5,6 +5,7 @@ import isValidZipcode from 'is-valid-zipcode';
 import { getIngredients } from './Recipe';
 import { getPricesInLocations } from './kroger';
 const { MessagingResponse } = twilio.twiml;
+const ZIP_CODE = 98105;
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -37,9 +38,11 @@ app.post('/sms', async (req, res) => {
   } else {
     // Call getProducts with recipe ID
     let products = await getIngredients(keyWord);
-    let output = await getPricesInLocations(98105, products);
-    
-
+    let output = await getPricesInLocations(ZIP_CODE, products);
+    // for each {location, totalPrice} in output output something like:
+    // Location Name: <name>
+    // Location Address: <address>
+    // Estimated Cost: <totalPrice>
   }
 
 

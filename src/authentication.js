@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
-//dotenv.config({path: '../.env'});
+//dotenv.config({path: '../.env'}); Uncomment this to use local files and comment out the line above
 console.log(process.env);
 
 import { Buffer } from 'node:buffer';
