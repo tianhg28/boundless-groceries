@@ -19,6 +19,24 @@ async function getLocations(zipCode) {
     
   }
 
+// given locationId and product, return item object containing
+// cheaptest price
+// Param: LocationId, Product
+// Returns: Price of cheapest item, -1 if product doesn't exist
+async function getCheapestPrice(locationId, productName) {
+  // Get array of products
+  let products = await getProducts(locationId, productName)
+
+  if (products == undefined || products.length == 0) {
+    return -1;
+  }
+
+  let cheapestIndex = Number.MAX_SAFE_INTEGER;
+  for (let i = 0; i < products.data.length; i++) {
+    cheapestIndex = Math.min(cheapestIndex, products.data[i].items[0].price.regular);
+  }
+  return cheapestIndex;
+}
 
 async function getProducts(locationId, productName) {
     // Use stored access token for product request
@@ -41,4 +59,4 @@ async function getProducts(locationId, productName) {
     return productResponse.json();
   }
 
-export {getLocations, getProducts};
+export {getLocations, getProducts, getCheapestPrice};
