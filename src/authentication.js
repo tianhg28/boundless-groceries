@@ -18,8 +18,9 @@ async function getAccessToken() {
           "Content-Type": "application/x-www-form-urlencoded"
         },
         body: "grant_type=client_credentials&scope="
-      });
-    return response.json();
+      })
+    
+    response.json().then(res => res.access_token);
 }
 
 export default getAccessToken;
