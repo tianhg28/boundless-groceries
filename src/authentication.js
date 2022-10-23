@@ -1,9 +1,14 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+//dotenv.config({path: '../.env'});
+console.log(process.env);
+
 import { Buffer } from 'node:buffer';
 
 async function getAccessToken() {
     let url = "https://api.kroger.com/v1/connect/oauth2/token";
-    let clientId = "boundlessgroceries-54a8f2bbd34a77ef33396a66c8801cf8401111886519534563";
-    let clientSecret = "P-R3POo8eFhbSE4sjI1XZkB-TCasiwwGvTdVt-wc";
+    let clientId = process.env.KROGER_CLIENT_ID;
+    let clientSecret = process.env.KROGER_CLIENT_SECRET;
 
     const encoded = Buffer.from(`${clientId}:${clientSecret}`, `ascii`);
     // ClientId and clientSecret must be encoded
