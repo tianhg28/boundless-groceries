@@ -6,7 +6,7 @@ const map = new Map();
 const ingredients = [];
 const url = [];
 
-function getRecipes(tags) {
+export function getRecipes(tags) {
   let searchString = 'https://api.spoonacular.com/recipes/complexSearch?';
   searchString += 'query=' + tags + '&' + apiKey;
   const xhr = new XMLHttpRequest();
@@ -30,7 +30,7 @@ function getRecipes(tags) {
   // .then((data) => console.log(data));
 }
 
-function getIngredients(id) {
+export function getIngredients(id) {
   let searchString = 'https://api.spoonacular.com/recipes/' + id + '/information';
   // Append api key
   searchString += '?' + apiKey + '&includeNutrition=false';
@@ -46,6 +46,3 @@ function getIngredients(id) {
         url.push(data['sourceUrl']);
   });
 }
-
-getRecipes(process.argv[2])
-getIngredients(657003);
