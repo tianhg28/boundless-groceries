@@ -4,7 +4,7 @@ async function getLocations(zipCode) {
     // Use stored access token for location request
     let accessToken = await getAccessToken();
 
-    let locationUrl = "https://api.kroger.com/v1/locations?filter.zipCode.near" + zipCode;
+    let locationUrl = "https://api.kroger.com/v1/locations?filter.zipCode.near=" + zipCode;
     // Location request body
     let locationResponse = await fetch(locationUrl, {
       method: "GET",
