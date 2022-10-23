@@ -20,16 +20,14 @@ async function getLocations(zipCode) {
   }
 
 
-async function getProducts(locationId) {
+async function getProducts(locationId, productName) {
     // Use stored access token for product request
-    let accessToken = authentication.getAccessToken();
+    let accessToken = await getAccessToken();
     // Build product URL
     // Base URL (https://api.kroger.com)
     // Version/Endpoint (/v1/products)
     // Query String (?filter.locationId=term)
-    let productUrl = `${
-      config.apiBaseUrl
-    }/v1/products?filter.locationId=${locationId}`;
+    let productUrl = `https://api.kroger.com/v1/products?filter.locationId=${locationId}&filter.term=${productName}`;
     // Product request body
     let productResponse = await fetch(productUrl, {
       method: "GET",

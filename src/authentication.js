@@ -16,7 +16,7 @@ async function getAccessToken() {
           "Authorization": authorization,
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: "grant_type=client_credentials&scope="
+        body: "grant_type=client_credentials&scope=product.compact"
       });
     let responseJSON = await response.json();
     return responseJSON.access_token;
