@@ -3,6 +3,8 @@ import twilio from 'twilio';
 import bodyParser from 'body-parser';
 import * as ReciepeFunctions from './Recipe.js'
 import { getPricesInLocations } from './kroger.js';
+import * as dotenv from 'dotenv';
+dotenv.config({path: '../.env'});
 const { MessagingResponse } = twilio.twiml;
 const ZIP_CODE = 98105;
 
@@ -52,9 +54,8 @@ app.post('/sms', async (req, res) => {
       string += '\n' + location.name + '\n' + address + "\n" + totalPrice + "\n"; 
     }
     twiml.message(string);
+    console.log("we got here");
     res.type('text/xml').send(twiml.toString());
-
-    console.log(output);
     // for each {location, totalPrice} in output output something like:
     // Location Name: <name>
     // Location Address: <address>

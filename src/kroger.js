@@ -18,9 +18,7 @@ async function getLocations(zipCode) {
     });
     // Return JSON object
     let json = await locationResponse.json();
-    console.log(json);
     return json.data;
-    
   }
 
 async function getPricesInLocations(zipCode, productNames) {
