@@ -23,22 +23,21 @@ async function getLocations(zipCode) {
 async function getPricesInLocations(zipCode, productNames) {
   let res = [];
   let locations = await getLocations(zipCode);
-  locations.forEach(location => {
+  for (const location of locations) {
     let locationId = location.locationId;
     let totalPrice = 0;
-    productNames.every(async productName => {
-      let price = 1;// await getCheapestPrice(locationId, productName);
-      if (price == null) {
+    for (const productName of productNames) {
+      let price = await getCheapestPrice(locationId, productName);
+      if (price == -1) {
         totalPrice = null;
-        return false;
+        break;
       }
-      totalPrice += price;
-      return true;
-    })
+      totalPrice += price; 
+    }
     if (totalPrice != null) {
       res.push({location, totalPrice});
     }
-  });
+  };
   return res;
 }
 
@@ -55,8 +54,14 @@ async function getCheapestPrice(locationId, productName) {
   }
 
   let cheapestIndex = Number.MAX_SAFE_INTEGER;
-  for (let i = 0; i < products.data.length; i++) {
-    cheapestIndex = Math.min(cheapestIndex, products.data[i].items[0].price.regular);
+  for (let i = 0; i < products.length; i++) {
+    if (products[i].items[0].price != null) {
+      cheapestIndex = Math.min(cheapestIndex, products[i].items[0].price.regular);
+    }
+  }
+
+  if (cheapestIndex == Number.MAX_SAFE_INTEGER) {
+    return -1;
   }
   return cheapestIndex;
 }
