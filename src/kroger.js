@@ -1,5 +1,7 @@
 import getAccessToken from "../src/authentication.js";
 import fetch from 'node-fetch';
+import concat from 'async/concat.js';
+
 import * as dotenv from 'dotenv';
 dotenv.config({path: '../.env'});
 
@@ -25,25 +27,30 @@ async function getLocations(zipCode) {
     return json.data;
   }
 
+
 async function getPricesInLocations(zipCode, productNames) {
   let res = [];
   let locations = await getLocations(zipCode);
-  await locations.forEach(async location => {
+  await Promise.all(locations.map(async location => {
     let locationId = location.locationId;
     let totalPrice = 0;
-    await productNames.forEach(async productName => {
-      let price = await getCheapestPrice(locationId, productName);
+    for (let i = 0; i < productNames.length; i++) {
+      
+      let price = await getCheapestPrice(locationId, productNames[i]);
       if (price == -1) {
         totalPrice = null;
+        break;
       }
       totalPrice += price; 
-      if (totalPrice != null) {
-        res.push({location, totalPrice});
-      }
-    });
-  })
+    }
+
+    if (totalPrice != null) {
+      res.push({location, totalPrice});
+    }
+  }));
   return res;
-}
+};
+
 
 // given locationId and product, return item object containing
 // cheaptest price
@@ -52,7 +59,6 @@ async function getPricesInLocations(zipCode, productNames) {
 async function getCheapestPrice(locationId, productName) {
   // Get array of products
   let products = await getProducts(locationId, productName)
-
   if (products == undefined || products.length == 0) {
     return -1;
   }
@@ -84,7 +90,7 @@ async function getProducts(locationId, productName) {
       cache: "no-cache",
       headers: {
         Authorization: `bearer ${accessToken}`,
-        "Content-Type": "application/json; charset=utf-8"
+        "Content-Type": "application/json"
       }
     });
     // Return JSON object

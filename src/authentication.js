@@ -1,6 +1,4 @@
-import * as dotenv from 'dotenv';
 import fetch from 'node-fetch';
-//dotenv.config();
 
 
 import { Buffer } from 'node:buffer';

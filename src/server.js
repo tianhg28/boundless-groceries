@@ -1,6 +1,3 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
-
 import express from'express';
 import twilio from 'twilio';
 import bodyParser from 'body-parser';
@@ -50,6 +47,7 @@ app.post('/sms', async (req, res) => {
     // Call getProducts with recipe ID
     let products = await ReciepeFunctions.getIngredients(keyWord);
     let output = await getPricesInLocations(ZIP_CODE, products);
+
     let string = "";
     // for each {location, totalPrice} in output output something like:
     for (let {location, totalPrice} of output) {
