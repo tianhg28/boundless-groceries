@@ -47,3 +47,5 @@ export function getIngredients(id) {
   });
   return ingredients;
 }
+
+getIngredients(324694);
