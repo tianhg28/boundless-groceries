@@ -15,9 +15,32 @@ async function getLocations(zipCode) {
       }
     });
     // Return JSON object
-    return locationResponse.json();
+    let json = await locationResponse.json();
+    return json.data;
     
   }
+
+async function getPricesInLocations(zipCode, productNames) {
+  let res = [];
+  let locations = await getLocations(zipCode);
+  locations.forEach(location => {
+    let locationId = location.locationId;
+    let totalPrice = 0;
+    productNames.every(async productName => {
+      let price = 1;// await getCheapestPrice(locationId, productName);
+      if (price == null) {
+        totalPrice = null;
+        return false;
+      }
+      totalPrice += price;
+      return true;
+    })
+    if (totalPrice != null) {
+      res.push({location, totalPrice});
+    }
+  });
+  return res;
+}
 
 
 async function getProducts(locationId, productName) {
@@ -38,7 +61,8 @@ async function getProducts(locationId, productName) {
       }
     });
     // Return JSON object
-    return productResponse.json();
+    let json = await productResponse.json();
+    return json.data;
   }
 
-export {getLocations, getProducts};
+export {getLocations, getProducts, getPricesInLocations};
