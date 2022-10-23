@@ -83,8 +83,4 @@ async function getProducts(locationId, productName) {
     return json.data;
   }
 
-<<<<<<< HEAD
-export {getLocations, getProducts, getPricesInLocations};
-=======
-export {getLocations, getProducts, getCheapestPrice};
->>>>>>> 3479d308282ca73918f1e992528bfb81dfcba29b
+export {getLocations, getProducts, getPricesInLocations, getCheapestPrice};
