@@ -1,4 +1,4 @@
-let kroger = require('../src/kroger');
+import {getLocations, getProducts} from "../src/kroger.js"
 
 let zipCode = "78704";
-kroger.getLocations(zipCode);
+console.log(await getLocations(zipCode));

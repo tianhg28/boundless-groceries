@@ -1,3 +1,3 @@
 import getAccessToken from "../src/authentication.js";
 
-console.log(getAccessToken())
+console.log(await getAccessToken())

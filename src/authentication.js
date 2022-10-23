@@ -13,14 +13,13 @@ async function getAccessToken() {
         method: "POST",
         cache: "no-cache",
         headers: {
-          //"Authorization": "Basic {{base64(" + client_id  + ":" + client_secret + ")}}",
           "Authorization": authorization,
           "Content-Type": "application/x-www-form-urlencoded"
         },
         body: "grant_type=client_credentials&scope="
-      })
-    
-    response.json().then(res => res.access_token);
+      });
+    let responseJSON = await response.json();
+    return responseJSON.access_token;
 }
 
 export default getAccessToken;

@@ -1,8 +1,8 @@
-import getAccessToken from "authentication.js";
+import getAccessToken from "../src/authentication.js";
 
 async function getLocations(zipCode) {
     // Use stored access token for location request
-    let accessToken = getAccessToken();
+    let accessToken = await getAccessToken();
 
     let locationUrl = "https://api.kroger.com/v1/locations?filter.zipCode.near" + zipCode;
     // Location request body
@@ -43,7 +43,4 @@ async function getProducts(locationId) {
     return productResponse.json();
   }
 
-module.exports = {
-  getLocations,
-  getProducts
-};
+export {getLocations, getProducts};
