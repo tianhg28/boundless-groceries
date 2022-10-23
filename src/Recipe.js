@@ -1,9 +1,8 @@
-import XMLHttpRequest from 'xhr2';
 import fetch from 'node-fetch';
 
 const apiKey = 'apiKey=79e72bb78e0a4ea09a550126ed3a0279'
 const ingredients = [];
-const url = [];
+const map = new Map();
 
 export async function getRecipes(tags) {
   let searchString = 'https://api.spoonacular.com/recipes/complexSearch?';
@@ -16,7 +15,10 @@ export async function getRecipes(tags) {
   });
 
   let json = await response.json();
-  return json;
+  for (let i = 0; i < json.results.length; i++) {
+    map.set(json.results[i]['id'], json.results[i]['title']);
+  }
+  return map;
   // fetch(searchString)
   // .then((response) => response.json())
   // .then((data) => console.log(data));

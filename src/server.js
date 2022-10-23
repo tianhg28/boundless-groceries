@@ -1,9 +1,8 @@
 import express from'express';
 import twilio from 'twilio';
 import bodyParser from 'body-parser';
-import isValidZipcode from 'is-valid-zipcode';
-import { getIngredients } from './Recipe';
-import { getPricesInLocations } from './kroger';
+import * as ReciepeFunctions from './Recipe.js'
+import { getPricesInLocations } from './kroger.js';
 const { MessagingResponse } = twilio.twiml;
 const ZIP_CODE = 98105;
 
@@ -30,7 +29,14 @@ app.post('/sms', async (req, res) => {
 
   if (isNaN(keyWord)) {
     // Call getRecipes with recipe ID
-    let recipes = await getRecipes(keyWord);
+    console.log('we ran!')
+    let reciepe = await ReciepeFunctions.getRecipes(keyWord)
+    let string = "";
+    for (let [key, value] of reciepe) {
+        string += '\n' + key + ': ' + value; 
+    }
+    twiml.message(string);
+    res.type('text/xml').send(twiml.toString());
     // for each recipe output something like:
     // Recipe Name: <name>
     // Recipe ID: <id>
@@ -44,12 +50,6 @@ app.post('/sms', async (req, res) => {
     // Location Address: <address>
     // Estimated Cost: <totalPrice>
   }
-
-
-
-  twiml.message('The Robots are coming! Head for the hills!');
-
-  res.type('text/xml').send(twiml.toString());
 });
 
 app.listen(3000, () => {
