@@ -1,7 +1,7 @@
 import XMLHttpRequest from 'xhr2';
 import fetch from 'node-fetch';
 
-const apiKey = 'apiKey=d6b702b943fe427884ffdcb4cc7bbf17'
+const apiKey = 'apiKey=79e72bb78e0a4ea09a550126ed3a0279'
 const map = new Map();
 const ingredients = [];
 const url = [];
@@ -46,3 +46,5 @@ export function getIngredients(id) {
         url.push(data['sourceUrl']);
   });
 }
+
+getRecipes('chocolate')
