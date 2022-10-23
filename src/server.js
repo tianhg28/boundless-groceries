@@ -40,6 +40,11 @@ app.post('/sms', async (req, res) => {
     // for each recipe output something like:
     // Recipe Name: <name>
     // Recipe ID: <id>
+    let responseString = '';
+    recipes.result.forEach(element => {
+      responseString += element.title + ' ' + element.id + '\n';
+    });
+    twiml.message(responseString);
 
   } else {
     // Call getProducts with recipe ID
