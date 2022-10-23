@@ -7,7 +7,7 @@ function getRecipes(tags) {
   let searchString = 'https://api.spoonacular.com/recipes/complexSearch?';
   searchString += 'query=' + tags + apiKey;
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', searchString, false);
+  xhr.open('GET', searchString, true);
   xhr.setRequestHeader('Accept', 'application/json');
   xhr.onreadystatechange = () => {
     if (xhr.readyState === XMLHttpRequest.DONE) {
