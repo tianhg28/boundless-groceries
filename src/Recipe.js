@@ -12,7 +12,6 @@ function getRecipes(tags) {
   xhr.onreadystatechange = () => {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       const res = JSON.parse(xhr.responseText);
-      console.log(res);
       for (var i = 0; i < res.results.length; i++) {
         // This needs to be changed to message the twilio thingy
         console.log((i + 1) + ") " + res.results[i]['title'])
@@ -27,4 +26,4 @@ function getRecipes(tags) {
   // .then((data) => console.log(data));
 }
 
-getRecipes('chocolate')
+getRecipes(process.argv[2])
