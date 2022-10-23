@@ -2,8 +2,8 @@ import XMLHttpRequest from 'xhr2';
 import fetch from 'node-fetch';
 
 const apiKey = 'apiKey=79e72bb78e0a4ea09a550126ed3a0279'
-const map = new Map();
 const ingredients = [];
+const recipes = [];
 const url = [];
 
 export function getRecipes(tags) {
@@ -19,12 +19,12 @@ export function getRecipes(tags) {
         // This needs to be changed to message the twilio thingy
         console.log((i + 1) + ") " + res.results[i]['title'])
         var id = res.results[i]['id'];
-        console.log(id);
-        map.set(i + 1, id);
+        recipes.push(id);
       }
     }
   };
   xhr.send(null);
+  return recipes;
   // fetch(searchString)
   // .then((response) => response.json())
   // .then((data) => console.log(data));
@@ -45,6 +45,5 @@ export function getIngredients(id) {
         }
         url.push(data['sourceUrl']);
   });
+  return ingredients;
 }
-
-getRecipes('chocolate')
