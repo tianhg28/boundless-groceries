@@ -1,4 +1,6 @@
 import getAccessToken from "../src/authentication.js";
+import fetch from 'node-fetch';
+
 
 async function getLocations(zipCode) {
     // Use stored access token for location request
@@ -16,6 +18,7 @@ async function getLocations(zipCode) {
     });
     // Return JSON object
     let json = await locationResponse.json();
+    console.log(json);
     return json.data;
     
   }

@@ -28,7 +28,6 @@ export async function getIngredients(id) {
   let searchString = 'https://api.spoonacular.com/recipes/' + id + '/information';
   // Append api key
   searchString += '?' + apiKey + '&includeNutrition=false';
-  console.log(searchString);
 
   fetch(searchString)
   .then((response) => response.json())
@@ -37,7 +36,6 @@ export async function getIngredients(id) {
           ingredients.push(data['extendedIngredients'][i].name);
           // This needs to be changed to message the twilio thingy
         }
-        url.push(data['sourceUrl']);
   });
   return ingredients;
 }

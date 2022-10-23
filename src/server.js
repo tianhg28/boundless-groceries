@@ -43,8 +43,18 @@ app.post('/sms', async (req, res) => {
 
   } else {
     // Call getProducts with recipe ID
-    let products = await getIngredients(keyWord);
+    let products = await ReciepeFunctions.getIngredients(keyWord);
     let output = await getPricesInLocations(ZIP_CODE, products);
+    let string = "";
+    // for each {location, totalPrice} in output output something like:
+    for (let {location, totalPrice} of output) {
+      let address = Object.values(location.address).join(" ");
+      string += '\n' + location.name + '\n' + address + "\n" + totalPrice + "\n"; 
+    }
+    twiml.message(string);
+    res.type('text/xml').send(twiml.toString());
+
+    console.log(output);
     // for each {location, totalPrice} in output output something like:
     // Location Name: <name>
     // Location Address: <address>

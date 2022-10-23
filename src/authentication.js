@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import fetch from 'node-fetch';
 dotenv.config();
 //dotenv.config({path: '../.env'}); Uncomment this to use local files and comment out the line above
 console.log(process.env);
