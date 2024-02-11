@@ -25,10 +25,28 @@ healthy vegetarian
 1096198: Healthy Nut & Seed Crispbread 
 
 **User:**
-646491
+1847920
 
 **Twilio:**
+Quality Food Center - University Village  
+2746 NE 45th St Seattle WA 98105 KING COUNTY  
+18.98  
 
+Quality Food Center - Wallingford  
+4500 Wallingford Ave N Seattle WA 98103 KING COUNTY  
+18.98  
+
+Quality Food Center - Broadway Market  
+417 Broadway E # 2 Seattle WA 98102 KING COUNTY  
+18.98  
+
+Fred Meyer - Ballard  
+915 Nw 45Th St Seattle WA 98107 KING COUNTY  
+16.31  
+
+Fred Meyer - Greenwood  
+100 NW 85th St Seattle WA 98117 KING COUNTY  
+16.31  
 
 **User:**
  (｡◕‿◕｡)
