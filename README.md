@@ -24,10 +24,10 @@ healthy vegetarian
 1096070: Healthy Morning Glory Muffins  
 1096198: Healthy Nut & Seed Crispbread 
 
-**User:**
+**User:**  
 1847920
 
-**Twilio:**
+**Twilio:**  
 Quality Food Center - University Village  
 2746 NE 45th St Seattle WA 98105 KING COUNTY  
 18.98  
@@ -48,7 +48,7 @@ Fred Meyer - Greenwood
 100 NW 85th St Seattle WA 98117 KING COUNTY  
 16.31  
 
-**User:**
+**User:**  
  (｡◕‿◕｡)
 
 ## Prerequisites
