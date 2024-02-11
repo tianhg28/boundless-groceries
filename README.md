@@ -6,23 +6,23 @@ This project is an SMS-based application that allows users to inquire about reci
 
 ## Example User Interation
 
-**Twilio:** 
-What do you want to eat?
+**Twilio:**  
+What do you want to eat?  
 
-**User:**
-healthy vegetarian
+**User:**  
+healthy vegetarian  
 
-**Twilio:**
-1847920: Healthy Quinoa Salad 
-646491: Healthy Mint Brownies 
-646499: Healthy Orange Chicken 
-665470: Healthy Chocolate Mousse 
-646484: Healthy Hazelnut Cookies 
-911158: Healthy Blueberry Muffins 
-1096214: Healthy Tomato Basil Soup 
-646515: Healthy Southwestern Oatmeal 
-1096070: Healthy Morning Glory Muffins 
-1096198: Healthy Nut & Seed Crispbread
+**Twilio:**  
+1847920: Healthy Quinoa Salad  
+646491: Healthy Mint Brownies  
+646499: Healthy Orange Chicken  
+665470: Healthy Chocolate Mousse  
+646484: Healthy Hazelnut Cookies  
+911158: Healthy Blueberry Muffins  
+1096214: Healthy Tomato Basil Soup  
+646515: Healthy Southwestern Oatmeal  
+1096070: Healthy Morning Glory Muffins  
+1096198: Healthy Nut & Seed Crispbread 
 
 **User:**
 646491
