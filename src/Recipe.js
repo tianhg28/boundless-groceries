@@ -1,7 +1,6 @@
 import fetch from 'node-fetch';
 
-const apiKey = 'apiKey=79e72bb78e0a4ea09a550126ed3a0279'
-const ingredients = [];
+const apiKey = 'apiKey=25bf532c17584c89868dde09b7c4a847'
 const map = new Map();
 
 export async function getRecipes(tags) {
@@ -29,13 +28,8 @@ export async function getIngredients(id) {
   // Append api key
   searchString += '?' + apiKey + '&includeNutrition=false';
 
-  fetch(searchString)
-  .then((response) => response.json())
-  .then((data) => {
-    for (var i = 0; i < data['extendedIngredients'].length; i++) {
-          ingredients.push(data['extendedIngredients'][i].name);
-          // This needs to be changed to message the twilio thingy
-        }
-  });
+  const response = await fetch(searchString);
+  const data = await response.json();
+  const ingredients = data['extendedIngredients'].map(ingredient => ingredient.name);
   return ingredients;
 }

@@ -3,8 +3,8 @@ import twilio from 'twilio';
 import bodyParser from 'body-parser';
 import * as ReciepeFunctions from './Recipe.js'
 import { getPricesInLocations } from './kroger.js';
-import * as dotenv from 'dotenv';
-dotenv.config({path: '../.env'});
+import getAccessToken from './authentication.js'
+
 const { MessagingResponse } = twilio.twiml;
 const ZIP_CODE = 98105;
 
@@ -27,7 +27,9 @@ app.post('/sms', async (req, res) => {
   const response = req.body.Body.split(' ');
 
   const keyWord = response[0].toLowerCase();
-  
+
+  // Use stored access token for location request
+  let accessToken = await getAccessToken();
 
   if (isNaN(keyWord)) {
     // Call getRecipes with recipe ID
@@ -46,7 +48,7 @@ app.post('/sms', async (req, res) => {
   } else {
     // Call getProducts with recipe ID
     let products = await ReciepeFunctions.getIngredients(keyWord);
-    let output = await getPricesInLocations(ZIP_CODE, products);
+    let output = await getPricesInLocations(ZIP_CODE, products, accessToken);
 
     let string = "";
     // for each {location, totalPrice} in output output something like:
@@ -54,7 +56,7 @@ app.post('/sms', async (req, res) => {
       let address = Object.values(location.address).join(" ");
       string += '\n' + location.name + '\n' + address + "\n" + totalPrice + "\n"; 
     }
-    twiml.message(string);
+    twiml.message("string");
     console.log("we got here");
     res.type('text/xml').send(twiml.toString());
     // for each {location, totalPrice} in output output something like:

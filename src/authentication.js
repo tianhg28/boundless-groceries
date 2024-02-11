@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
-
-
 import { Buffer } from 'node:buffer';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 async function getAccessToken() {
     let url = "https://api.kroger.com/v1/connect/oauth2/token";
