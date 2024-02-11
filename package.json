@@ -18,6 +18,7 @@
   "homepage": "https://github.com/tianhg28/boundless-groceries#readme",
   "type": "module",
   "dependencies": {
+    "async": "^3.2.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "is-valid-zipcode": "^1.0.3",
