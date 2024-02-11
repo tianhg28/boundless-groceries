@@ -3,11 +3,11 @@ import fetch from 'node-fetch';
 async function getPricesInLocations(zipCode, productNames, accessToken) {
   let res = [];
   let locations = await getLocations(zipCode, accessToken);
-  await Promise.all(locations.map(async location => {
+
+  for (const location of locations) {
     let locationId = location.locationId;
     let totalPrice = 0;
     for (let i = 0; i < productNames.length; i++) {
-      
       let price = await getCheapestPrice(locationId, productNames[i], accessToken);
       if (price == -1) {
         totalPrice = null;
@@ -19,7 +19,8 @@ async function getPricesInLocations(zipCode, productNames, accessToken) {
     if (totalPrice != null) {
       res.push({location, totalPrice});
     }
-  }));
+  }
+
   return res;
 };
 
