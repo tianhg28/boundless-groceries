@@ -4,7 +4,7 @@
 ## Overview
 This project is an SMS-based application that allows users to inquire about recipes and find the prices of ingredients at local grocery stores. It leverages the Twilio API for SMS communication, the Spoonacular API for fetching recipes, and the Kroger API for obtaining grocery prices. Simply text the program a list of keywords about the recipe you want, choose the recipe using the ID number, and wait for a response containing the price of the recipe at each Kroger grocery store in your area.
 
-## Example User Interation
+## Example User Interaction
 
 **Twilio:**  
 What do you want to eat?  
