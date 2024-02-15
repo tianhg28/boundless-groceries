@@ -1,25 +1,32 @@
 import fetch from 'node-fetch';
 
 async function getPricesInLocations(zipCode, productNames, accessToken) {
-  let res = [];
   let locations = await getLocations(zipCode, accessToken);
 
-  for (const location of locations) {
+  // Wrap the logic for processing each location into a function that returns a promise
+  const processLocation = async (location) => {
     let locationId = location.locationId;
-    let totalPrice = 0;
-    for (let i = 0; i < productNames.length; i++) {
-      let price = await getCheapestPrice(locationId, productNames[i], accessToken);
-      if (price == -1) {
-        totalPrice = null;
-        break;
-      }
-      totalPrice += price; 
-    }
+    let pricesPromises = productNames.map(productName => 
+      getCheapestPrice(locationId, productName, accessToken)
+    );
 
-    if (totalPrice != null) {
-      res.push({location, totalPrice});
-    }
-  }
+    // Execute all promises for product prices in parallel
+    let prices = await Promise.all(pricesPromises);
+
+    // Check if any price is -1, if so, set totalPrice to null
+    let totalPrice = prices.includes(-1) ? null : prices.reduce((total, price) => total + price, 0);
+
+    return totalPrice !== null ? {location, totalPrice} : null;
+  };
+
+  // Map each location to a promise processing that location
+  let resultsPromises = locations.map(location => processLocation(location));
+
+  // Execute all location processing in parallel
+  let results = await Promise.all(resultsPromises);
+
+  // Filter out any null results (where totalPrice was null)
+  let res = results.filter(result => result !== null);
 
   return res;
 };
